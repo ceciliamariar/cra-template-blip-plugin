@@ -1,29 +1,85 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const ChatSuggestions = () => {
     const { state } = useLocation();
     const { t } = useTranslation();
-    const [suggestions, setSuggestions] = useState(null);
-    const [showSuggestions, setShowSuggestions] = useState(false);
-    const showOrHideSuggestions = () => setShowSuggestions(!showSuggestions);
-    const [loading, setLoading] = useState(true);
-    const showOrHideLoading = () => setLoading(!loading);
-    const [hasFailedToLoadSuggestions, setFailed] = useState(true);
-    const showOrHideFailedToLoadSuggestions = () => 
-        setFailed(!hasFailedToLoadSuggestions);
+    let showSuggestions = false;
+    let suggestions = [];
+    let loading = false;
+    let hasSuggestionsLoaded = false;
+    let hasFailedToLoadSuggestions = false;
 
-    function teste () {
-        console.log('Teste 1');
-    };
+    function toggleSuggestionsDialog() {
+        showSuggestions = true;
+        if (!hasSuggestionsLoaded) {
+            console.log('Linha 19');
+            loadSuggestions();
+        }
+        console.log(
+            `toggleSuggestionsDialog showSuggestions ${showSuggestions}`
+        );
+    }
+    function loadSuggestions() {
+        loading = true;
+        try {
+            // suggestions = SuggestionsService.getSuggestions(
+            //     ticketId,
+            //     ticket.ownerIdentity
+            // );
+            setTimeout(
+                console.log('SuggestionsService.getSuggestions!!'),
+                5000000000000
+            );
+            hasFailedToLoadSuggestions = false;
+        } catch (e) {
+            hasFailedToLoadSuggestions = true;
+        } finally {
+            loading = false;
+            hasSuggestionsLoaded = true;
+            console.log(
+                `toggleSuggestionsDialog showSuggestions ${showSuggestions}`
+            );
+            console.log(`toggleSuggestionsDialog loading ${loading}`);
+            console.log(
+                `toggleSuggestionsDialog hasSuggestionsLoaded ${hasSuggestionsLoaded}`
+            );
+        }
+    }
+    function selectSuggestion(suggestion) {
+        showSuggestions = false;
+        // this.$emit('onSelectSuggestion', { suggestion })
+        // SegmentService.createTicketTrack(
+        //   SegmentService.events.CHAT_AI_SUGGESTION_SELECT,
+        //   this.ticket,
+        //   {
+        //     'ticketId': this.ticketId,
+        //     'text-suggestions': this.suggestions,
+        //     'text-selected': suggestion,
+        //     'agentIdentity': decodeURIComponent(this.ticket.agentIdentity.split('@')[0])
+        //   }
+        // )
+        alert(`Opção escolhida: \n ${suggestion}`);
+    }
+
+    function close() {
+        showSuggestions = false;
+        console.log('Close');
+    }
+
     useEffect(() => {
         if (!!state) {
             const { suggestionsState } = state;
             if (!!suggestionsState) {
-                setSuggestions(suggestionsState);
+                suggestions = suggestionsState;
             }
         }
+        showSuggestions = false;
+        suggestions = [];
+        loading = false;
+        hasSuggestionsLoaded = false;
+        hasFailedToLoadSuggestions = false;
     }, [state]);
 
     return (
@@ -32,14 +88,16 @@ const ChatSuggestions = () => {
                 variant="secondary"
                 icon="message-talk"
                 size="short"
-                onClick={teste}
+                onClick={toggleSuggestionsDialog}
             >
                 {t('chatSuggestions.suggestedAnswer.button')}
             </bds-button>
             <bds-paper elevation="static" className="suggestions-dialog" />
-            {/* {showSuggestions ? (
-                <div className="overlay" onClick={showOrHideSuggestions} />
-            ) : null} */}
+            {showSuggestions ? (
+                <div className="overlay"/>
+            ) : (
+                <p> {showSuggestions}</p>
+            )}
             {showSuggestions ? (
                 <bds-paper
                     elevation="static"
@@ -62,7 +120,7 @@ const ChatSuggestions = () => {
                                 icon="close"
                                 size="short"
                                 className="color-content-default"
-                                onClick={showOrHideSuggestions}
+                                onClick={close}
                             />
                         </div>
                         <div className="suggestions-container">
@@ -71,9 +129,10 @@ const ChatSuggestions = () => {
                                     size="standard"
                                     color="main"
                                     className="h-100 w-100 center"
-                                    onClick={showOrHideLoading}
                                 />
-                            ) : null}
+                            ) : (
+                                <p> {loading}</p>
+                            )}
                             {hasFailedToLoadSuggestions ? (
                                 <div className="error-message-container">
                                     <bds-icon
@@ -92,22 +151,22 @@ const ChatSuggestions = () => {
                                     <bds-button
                                         data-testid="error-button"
                                         variant="ghost"
-                                        onClick={
-                                            showOrHideFailedToLoadSuggestions
-                                        }
+                                        onClick={loadSuggestions}
                                     >
                                         {t('chatSuggestions.error.button')}
                                     </bds-button>
                                 </div>
-                            ) : null}
+                            ) : (
+                                <p> {hasFailedToLoadSuggestions}</p>
+                            )}
                             {!hasFailedToLoadSuggestions && !!suggestions ? (
                                 <ul className="suggestions-list">
                                     {suggestions.map((suggestion) => (
-                                        <li
-                                            className="suggestions-item pointer"
-                                        >
+                                        <li className="suggestions-item pointer">
                                             <bds-typo
-                                                onClick={() => alert(suggestion) }
+                                                onClick={selectSuggestion(
+                                                    suggestion
+                                                )}
                                                 tag="p"
                                                 variant="fs-14"
                                                 bold="regular"
@@ -118,11 +177,19 @@ const ChatSuggestions = () => {
                                         </li>
                                     ))}
                                 </ul>
-                            ) : null}
+                            ) : (
+                                <p>
+                                    {' '}
+                                    {!hasFailedToLoadSuggestions &&
+                                        !!suggestions}
+                                </p>
+                            )}
                         </div>
                     </div>
                 </bds-paper>
-            ) : null}
+            ) : (
+                <p> {showSuggestions}</p>
+            )}
         </div>
     );
 };
