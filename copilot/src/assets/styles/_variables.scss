@@ -1,1 +1,121 @@
 @import 'variables/colors';
+@import '~blip-toolkit/dist/scss/variables/module';
+@import '~blip-ds/dist/blip-ds/styles/colors';
+@import '~blip-ds/dist/blip-ds/styles/app';
+
+$m: 0.625rem;
+$u: 0.6rem;
+
+$container-padding: 24px;
+
+$bg-dark-gray: #242b36;
+$bg-gray: #3d4554;
+$blip-blue: #2cc3d5;
+$dark-gray: #52636C;
+
+//Primary
+$color-primary: #2CC3D5;
+$color-primary-light: #0CC8CC;
+$color-primary-dark: #15AFB2;
+
+//Onix
+$color-onix: #242B36;
+
+//Secondary
+$color-secondary: #546E7A;
+$color-secondary-light: lighten($color-secondary, 12%);
+$color-secondary-dark: darken($color-secondary, 12%);
+
+//Tertiary
+$color-tertiary: #2E3542;
+$color-tertiary-light: lighten($color-tertiary, 6%);
+$color-tertiary-dark: darken($color-tertiary, 6%);
+
+//Misc
+$color-success: #4DCB7B;
+$color-success-dark: darken($color-success, 9%);
+$color-success-2: #D7FFE6;
+$color-delete: #FB7A6D;
+$color-delete-dark: darken($color-delete, 9%);
+$color-info: #73D0FF;
+$color-info-light: #d0feff;
+$color-danger: #F76556;
+$color-danger-light: #fee2df;
+$color-danger-dark: darken($color-danger, 9%);
+$color-warning: #d6c808;
+$color-warning-light: #FFFCDD;
+$color-warning-dark: #D2A51A;
+$color-disabled: #BEBEBE;
+$color-accent: #B2DFDB;
+$color-white: #FFFFFF;
+$color-white-dark: #ECEFF0;
+$color-wa: #50C079;
+
+//Gray
+$color-gray: $color-disabled;
+$color-gray-light: #D3D3D3;
+$color-gray-light-2: #E9EDF3;
+$color-gray-light-3: #EAEEEE;
+$color-gray-light-4: #e3f1e9;
+$color-gray-light-5: #919c9e;
+$color-gray-dark: #999999;
+
+//Color palette: City
+$color-text: #52636C;
+
+//Color palette: Rooftop
+$color-text-light: #738192;
+
+//Color palette: Desk
+$color-text-light-2: #607B99;
+
+//Color palette: Cloud
+$color-text-light-3: #8CAABA;
+
+//Color palette: Silver
+$color-text-light-4: #94A3AB;
+
+//Color palette: Time
+$color-text-light-5: #A8BFC4;
+
+//Color palette: Breeze
+$color-text-light-6: #C9DFE4;
+
+//Color palette: Sky
+$color-text-light-7: #DAF2F4;
+
+// Color pallete: Light BLiP
+$color-light-blip: #0CC8CC;
+
+// Color pallete: Dark BLiP
+$color-dark-blip: #15AFB2;
+$color-text-dark: #4A4A4A;
+$color-text-dark-5: #334962;
+$color-gray-dark-2: #363F4E;
+$color-gray-dark-3: #222834;
+$color-gray-dark-4: #475D72;
+$color-text-disabled: #c5c5c5;
+$color-input-disabled: #EAECEC;
+
+//Login
+$color-blip-blue-1: #1BD6E7;
+$color-blip-blue-2: #0FC3F8;
+$color-blip-blue-3: #0ABCFF;
+
+//3rd-party
+$color-facebook: #3C5A99;
+$color-facebook-dark: darken($color-facebook, 9%);
+$border-color-1: #d3d3d3;
+
+//Responsive
+$break-xsmall: 480px;
+$break-smaller: 650px;
+$break-small: 950px;
+$break-medium: 1112px;
+$break-large: 1440px;
+$break-xlarge: 1600px;
+
+//Chat-List-Item
+$chat-list-item-hover-background-color: #E8F2FF;
+$chat-list-item-active-background-color: #D1E3FA;
+$chat-list-item-active-font-color: #3F7DE8;

@@ -8,7 +8,7 @@ import { getCurrentLanguageAsync } from './services/application-service';
 import { withLoadingAsync, showToast } from './services/common-service';
 import BlipPortalToastTypes from './constants/blip-portal-toast-types';
 
-const DEFAULT_LANGUAGE = 'pt';
+const DEFAULT_LANGUAGE = 'pt/br';
 
 const App = () => {
     const { t } = useTranslation();

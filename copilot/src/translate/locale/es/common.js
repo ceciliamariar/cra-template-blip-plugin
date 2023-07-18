@@ -1,7 +1,6 @@
 const translations = {
     title: {
         homePage: 'Copilot complementos',
-        exemples: 'Ejemplos',
         systemInfo: 'Información del sistema',
         userInfo: 'Información del usuario'
     },
@@ -13,7 +12,8 @@ const translations = {
     },
     link: {
         blipDataExample: 'Obtener datos de blip',
-        swrExemple: 'Obtener datos con SWR'
+        swrExemple: 'Obtener datos con SWR',
+        chatSuggestions: 'Sugerencias de chat'
     },
     button: {
         repository: 'Visite el Repositorio'
@@ -30,7 +30,17 @@ const translations = {
     language: 'Idioma',
     accessKey: 'Llave de acceso',
     template: 'Plantilla',
-    creationDate: 'Fecha de creación'
+    creationDate: 'Fecha de creación',
+    chatSuggestions:{
+        suggestedAnswer: {
+            button: 'Sugerencia de respuesta',
+            title: 'Respuestas sugeridas'
+          },
+          error: {
+            button: 'Inténtalo de nuevo',
+            title: '!Vaya¡ Algo no salió muy bien.'
+          }
+    }
 };
 
 export default translations;

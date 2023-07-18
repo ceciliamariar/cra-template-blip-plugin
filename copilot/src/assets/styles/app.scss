@@ -2,11 +2,16 @@
 @import '~blip-toolkit/dist/scss/main';
 @import '~blip-ds/dist/collection/styles/_fonts.scss';
 @import '~blip-ds/dist/collection/styles/_colors.scss';
+@import 'variables.scss';
+@import 'ui.scss';
 
 // plugin template scss
 @import 'variables';
 @import 'mixins';
 @import 'utilities';
+
+$dialog-padding: 1rem;
+$dialog-margin: 1.5rem;
 
 body {
     margin: 0;
@@ -40,4 +45,78 @@ code {
         -webkit-transform: scale(1);
         opacity: 1;
     }
+}
+
+.suggestions-dialog {
+    position: absolute;
+    bottom: 68px;
+    left: 0;
+    padding: $dialog-padding;
+    margin: 0 $dialog-margin;
+    z-index: 5;
+    width: calc(100% - #{$dialog-padding * 2} - #{$dialog-margin * 2});
+    max-width: 800px;
+    height: 250px;
+    background: $color-surface-1;
+    border-radius: 8px;
+}
+
+.suggestions-heading {
+    display: flex;
+    align-items: center;
+    padding-bottom: 1rem;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.suggestions-container {
+    overflow: auto;
+    height: 70%;
+
+    @include scrollbar--thin($color-text-light-5);
+}
+
+.close-button {
+    background-color: transparent;
+    border: none;
+    height: 24px;
+}
+
+.suggestions-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.suggestions-item {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid $color-surface-3;
+
+    &:hover {
+        background-color: $color-surface-2;
+    }
+}
+
+.error-message-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.overlay {
+    position: fixed;
+    height: 100%;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    left: 0;
+    width: 100%;
+    z-index: 4;
 }

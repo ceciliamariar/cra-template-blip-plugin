@@ -1,0 +1,75 @@
+@mixin scrollbar($color) {
+  &::-webkit-scrollbar {
+    width: 1 * $u;
+    height: 1 * $u;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    background-color: $color;
+    border-radius: 5px;
+  }
+}
+
+@mixin scrollbar--thin($color) {
+  &::-webkit-scrollbar {
+    width: 0.65 * $u;
+    height: 0.65 * $u;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $color;
+    border-radius: 5px;
+  }
+}
+
+@mixin placeholder($color) {
+  &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+      color: $color;
+  }
+
+  &:-moz-placeholder { /* Firefox 18- */
+    color: $color;
+    opacity: 1;
+  }
+
+  &::-moz-placeholder { /* Firefox 19+ */
+      color: $color;
+      opacity: 1;
+  }
+
+  &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+      color: $color;
+  }
+
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: $color-text-light-5;
+  }
+
+  ::placeholder {
+    /* Most modern browsers support this now. */
+    color: $color-text-light-5;
+  }
+}
+
+@mixin box-shadow ($h-offset, $v-offset, $blur, $spread, $color) {
+  box-shadow: $h-offset $v-offset $blur $spread $color;
+  -o-box-shadow: $h-offset $v-offset $blur $spread $color;
+  -webkit-box-shadow: $h-offset $v-offset $blur $spread $color;
+  -moz-box-shadow: $h-offset $v-offset $blur $spread $color;
+}
+
+@mixin box-shadow-inset ($h-offset, $v-offset, $blur, $spread, $color) {
+  box-shadow: inset $h-offset $v-offset $blur $spread $color;
+  -o-box-shadow: inset $h-offset $v-offset $blur $spread $color;
+  -webkit-box-shadow: inset $h-offset $v-offset $blur $spread $color;
+  -moz-box-shadow: inset $h-offset $v-offset $blur $spread $color;
+}
