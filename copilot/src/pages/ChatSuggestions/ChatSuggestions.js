@@ -49,23 +49,21 @@ const ChatSuggestions = (props) => {
             setHasSuggestionsLoaded(true);
         }
     };
-    // function selectSuggestion(suggestion) {
-    //     setShowSuggestions(false);
-    //     // this.$emit('onSelectSuggestion', { suggestion })
-    //     // SegmentService.createTicketTrack(
-    //     //   SegmentService.events.CHAT_AI_SUGGESTION_SELECT,
-    //     //   this.ticket,
-    //     //   {
-    //     //     'ticketId': this.ticketId,
-    //     //     'text-suggestions': this.suggestions,
-    //     //     'text-selected': suggestion,
-    //     //     'agentIdentity': decodeURIComponent(this.ticket.agentIdentity.split('@')[0])
-    //     //   }
-    //     // )
-    //     alert(
-    //         `Opção escolhida: \n ${suggestion.id} - ${suggestion.suggestion}`
-    //     );
-    // }
+    function selectSuggestion(suggestion) {
+        setShowSuggestions(false);
+        // this.$emit('onSelectSuggestion', { suggestion })
+        // SegmentService.createTicketTrack(
+        //   SegmentService.events.CHAT_AI_SUGGESTION_SELECT,
+        //   this.ticket,
+        //   {
+        //     'ticketId': this.ticketId,
+        //     'text-suggestions': this.suggestions,
+        //     'text-selected': suggestion,
+        //     'agentIdentity': decodeURIComponent(this.ticket.agentIdentity.split('@')[0])
+        //   }
+        // )
+        console.log(suggestion);
+    }
 
     function close() {
         setShowSuggestions(false);
@@ -134,11 +132,10 @@ const ChatSuggestions = (props) => {
                             {!loading && !hasFailedToLoadSuggestions && suggestions ? (
                                 <ul className="suggestions-list">
                                     {suggestions.map((suggestion) => (
-                                        <li
-                                            className="suggestions-item pointer"
-                                        >
+                                        <li className="suggestions-item pointer">
                                             <bds-typo
                                                 key={`suggestions-item-${suggestion.id}`}
+                                                onClick={selectSuggestion(suggestion)}
                                                 tag="p"
                                                 variant="fs-14"
                                                 bold="regular"
