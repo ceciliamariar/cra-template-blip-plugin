@@ -1,26 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import '../../assets/styles/app.scss';
 
-const ChatSuggestions = () => {
-    const { state } = useLocation();
+const ChatSuggestions = (props) => {
+    const { ticketId } = props;
+    const { suggestions } = props;
+    const { lastMessage } = props;
     const { t } = useTranslation();
     const [showSuggestions, setShowSuggestions] = useState(false);
-    const [suggestions, setSuggestions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [hasSuggestionsLoaded, setHasSuggestionsLoaded] = useState(false);
     const [hasFailedToLoadSuggestions, setHasFailedToLoadSuggestions] =
         useState(false);
-
-    useEffect(() => {
-        if (!!state) {
-            const { suggestionsState } = state;
-            if (!!suggestionsState) {
-                setSuggestions(suggestionsState);
-            }
-        }
-    }, [state]);
 
     useEffect(() => {
         console.log(`useEffect loading ${loading}`);
@@ -28,18 +20,14 @@ const ChatSuggestions = () => {
 
     const toggleSuggestionsDialog = () => {
         setShowSuggestions(true);
-        console.log(
-            `toggleSuggestionsDialog hasSuggestionsLoaded ${hasSuggestionsLoaded}`
-        );
+        console.log(suggestions);
         if (!hasSuggestionsLoaded) {
-            console.log('Linha 19');
             loadSuggestions();
         }
     };
 
     const loadSuggestions = async () => {
         setLoading(true);
-        console.log(`toggleSuggestionsDialog loading ${loading}`);
         try {
             // suggestions = SuggestionsService.getSuggestions(
             //     ticketId,
@@ -59,11 +47,6 @@ const ChatSuggestions = () => {
         } finally {
             setLoading(false);
             setHasSuggestionsLoaded(true);
-            console.log(`loadSuggestions showSuggestions ${showSuggestions}`);
-            console.log(`loadSuggestions loading ${loading}`);
-            console.log(
-                `loadSuggestions hasSuggestionsLoaded ${hasSuggestionsLoaded}`
-            );
         }
     };
     // function selectSuggestion(suggestion) {
@@ -92,14 +75,6 @@ const ChatSuggestions = () => {
 
     return (
         <div className="hide-small hide-medium">
-            <bds-button
-                variant="secondary"
-                icon="message-talk"
-                size="short"
-                onClick={() => toggleSuggestionsDialog()}
-            >
-                {t('chatSuggestions.suggestedAnswer.button')}
-            </bds-button>
             {/* {showSuggestions ? (
                 <div> <div className="overlay" onClick={close} onKeyDown={close}/> </div>
             ) : null} */}
@@ -114,7 +89,7 @@ const ChatSuggestions = () => {
                                 margin="false"
                                 className="flex-grow-1"
                             >
-                                {t('chatSuggestions.suggestedAnswer.title')}
+                                {t('chatSuggestions.suggestedAnswer.title')} - {ticketId} - {lastMessage}
                             </bds-typo>
                             <bds-button
                                 variant="secondary"
@@ -178,9 +153,23 @@ const ChatSuggestions = () => {
                         </div>
                     </div>
                 </bds-paper>
-            ) : null}
+            ) : null}            
+            <bds-button
+                variant="secondary"
+                icon="message-talk"
+                size="short"
+                onClick={() => toggleSuggestionsDialog()}
+            >
+                {t('chatSuggestions.suggestedAnswer.button')}
+            </bds-button>
         </div>
     );
+};
+
+ChatSuggestions.propTypes = {
+    ticketId: PropTypes.string,
+    lastMessage: PropTypes.string,
+    suggestions: PropTypes.array
 };
 
 export default ChatSuggestions;
