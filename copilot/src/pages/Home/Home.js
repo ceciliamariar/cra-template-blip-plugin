@@ -29,7 +29,7 @@ const Home = () => {
                 'Lorem ipsum potenti eget potenti eleifend vel leo, porttitor adipiscing malesuada tellus fermentum aliquam lectus morbi, vitae ultrices suscipit nisi nunc varius. velit accumsan eu platea quisque suspendisse fringilla cras nullam orci curae, auctor metus tempor sit aenean massa sed torquent interdum, mattis ornare sociosqu cursus adipiscing ante neque turpis iaculis. augue varius aenean tristique blandit habitasse lectus sit varius lacinia, egestas ad morbi pellentesque per tellus morbi vulputate, nunc morbi posuere praesent pellentesque justo massa vivamus. lobortis curabitur libero himenaeos tincidunt lacinia diam vestibulum sem lectus pulvinar aliquet phasellus, vel posuere varius nisi mi aenean suscipit nisi aliquam eu.'
         }
     ];
-    const ticketIdMock = 123;
+    const ticketIdMock = '123';
     const lastMessageMock = 'Ultima mensagem';
 
     return (

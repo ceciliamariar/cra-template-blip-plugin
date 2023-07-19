@@ -20,6 +20,7 @@ const ChatSuggestions = (props) => {
 
     const toggleSuggestionsDialog = () => {
         setShowSuggestions(true);
+        console.log(showSuggestions);
         console.log(suggestions);
         if (!hasSuggestionsLoaded) {
             loadSuggestions();
@@ -50,7 +51,7 @@ const ChatSuggestions = (props) => {
         }
     };
     function selectSuggestion(suggestion) {
-        setShowSuggestions(false);
+        // setShowSuggestions(false);
         // this.$emit('onSelectSuggestion', { suggestion })
         // SegmentService.createTicketTrack(
         //   SegmentService.events.CHAT_AI_SUGGESTION_SELECT,
@@ -132,9 +133,8 @@ const ChatSuggestions = (props) => {
                             {!loading && !hasFailedToLoadSuggestions && suggestions ? (
                                 <ul className="suggestions-list">
                                     {suggestions.map((suggestion) => (
-                                        <li className="suggestions-item pointer">
+                                        <li className="suggestions-item pointer" key={`suggestions-item-${suggestion.id}`}>
                                             <bds-typo
-                                                key={`suggestions-item-${suggestion.id}`}
                                                 onClick={selectSuggestion(suggestion)}
                                                 tag="p"
                                                 variant="fs-14"
