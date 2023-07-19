@@ -14,10 +14,22 @@ const BLANK = '_blank';
 const Home = () => {
     const history = useHistory();
     const { t } = useTranslation();
-    const suggestions  = [
-        ' Lorem ipsum lobortis sollicitudin semper eu velit dapibus tempor euismod quis, potenti lorem neque inceptos vivamus suscipit curabitur est. proin est congue sit tellus turpis enim faucibus litora dictum mauris, sapien habitasse mollis dictum aptent est tellus a duis nunc velit, augue sodales aliquam curabitur suspendisse etiam elit fringilla in.',
-        'Lorem ipsum litora curae placerat sed quisque donec fames semper etiam mattis, quis dui nisi non lectus convallis class purus posuere bibendum placerat suscipit, enim volutpat sagittis mi metus accumsan mattis quisque placerat neque. tempor blandit himenaeos pharetra, cras pulvinar.',
-        'Lorem ipsum potenti eget potenti eleifend vel leo, porttitor adipiscing malesuada tellus fermentum aliquam lectus morbi, vitae ultrices suscipit nisi nunc varius. velit accumsan eu platea quisque suspendisse fringilla cras nullam orci curae, auctor metus tempor sit aenean massa sed torquent interdum, mattis ornare sociosqu cursus adipiscing ante neque turpis iaculis. augue varius aenean tristique blandit habitasse lectus sit varius lacinia, egestas ad morbi pellentesque per tellus morbi vulputate, nunc morbi posuere praesent pellentesque justo massa vivamus. lobortis curabitur libero himenaeos tincidunt lacinia diam vestibulum sem lectus pulvinar aliquet phasellus, vel posuere varius nisi mi aenean suscipit nisi aliquam eu.'
+    const suggestions = [
+        {
+            id: 4551,
+            suggestion:
+                'Lorem ipsum lobortis sollicitudin semper eu velit dapibus tempor euismod quis, potenti lorem neque inceptos vivamus suscipit curabitur est. proin est congue sit tellus turpis enim faucibus litora dictum mauris, sapien habitasse mollis dictum aptent est tellus a duis nunc velit, augue sodales aliquam curabitur suspendisse etiam elit fringilla in.'
+        },
+        {
+            id: 65,
+            suggestion:
+                'Lorem ipsum litora curae placerat sed quisque donec fames semper etiam mattis, quis dui nisi non lectus convallis class purus posuere bibendum placerat suscipit, enim volutpat sagittis mi metus accumsan mattis quisque placerat neque. tempor blandit himenaeos pharetra, cras pulvinar.'
+        },
+        {
+            id: 87,
+            suggestion:
+                'Lorem ipsum potenti eget potenti eleifend vel leo, porttitor adipiscing malesuada tellus fermentum aliquam lectus morbi, vitae ultrices suscipit nisi nunc varius. velit accumsan eu platea quisque suspendisse fringilla cras nullam orci curae, auctor metus tempor sit aenean massa sed torquent interdum, mattis ornare sociosqu cursus adipiscing ante neque turpis iaculis. augue varius aenean tristique blandit habitasse lectus sit varius lacinia, egestas ad morbi pellentesque per tellus morbi vulputate, nunc morbi posuere praesent pellentesque justo massa vivamus. lobortis curabitur libero himenaeos tincidunt lacinia diam vestibulum sem lectus pulvinar aliquet phasellus, vel posuere varius nisi mi aenean suscipit nisi aliquam eu.'
+        }
     ];
 
     const handleNavigation = useCallback(
@@ -49,15 +61,28 @@ const Home = () => {
                     className="f6 flex items-center blue no-underline underline-hover mt1 pointer"
                     data-testid="exemple-two"
                     aria-hidden="true"
-                    onClick={() =>
+                    onClick={() => {
                         handleNavigation(RoutesPath.CHAT_SUGGESTIONS.PATH, {
                             suggestionsState: suggestions
-                        })
-                    }
+                        });
+                    }}
                 >
                     <bds-icon name="file-txt-1" size="xxx-large" />
                     {t('link.chatSuggestions')}
-                </span>           
+                </span>
+                <span
+                    className="f6 flex items-center blue no-underline underline-hover mt1 pointer"
+                    data-testid="exemple-two"
+                    aria-hidden="true"
+                    onClick={() => {
+                        handleNavigation(RoutesPath.CHAT_SUGGESTIONS.PATH, {
+                            suggestionsState: suggestions
+                        });
+                    }}
+                >
+                    <bds-icon name="file-txt-1" size="xxx-large" />
+                    {t('link.chatSuggestions')}
+                </span>
             </div>
         </div>
     );
