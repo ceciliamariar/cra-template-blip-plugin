@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import '../../assets/styles/app.scss';
 
 const ChatSuggestions = () => {
     const { state } = useLocation();
@@ -17,8 +18,6 @@ const ChatSuggestions = () => {
             const { suggestionsState } = state;
             if (!!suggestionsState) {
                 setSuggestions(suggestionsState);
-                console.log(suggestionsState);
-                console.log(suggestions);
             }
         }
     }, [state]);
@@ -67,24 +66,27 @@ const ChatSuggestions = () => {
             );
         }
     };
-    function selectSuggestion(suggestion) {
-        setShowSuggestions(false);
-        // this.$emit('onSelectSuggestion', { suggestion })
-        // SegmentService.createTicketTrack(
-        //   SegmentService.events.CHAT_AI_SUGGESTION_SELECT,
-        //   this.ticket,
-        //   {
-        //     'ticketId': this.ticketId,
-        //     'text-suggestions': this.suggestions,
-        //     'text-selected': suggestion,
-        //     'agentIdentity': decodeURIComponent(this.ticket.agentIdentity.split('@')[0])
-        //   }
-        // )
-        alert(`Opção escolhida: \n ${suggestion.id} - ${suggestion.suggestion}`);
-    }
+    // function selectSuggestion(suggestion) {
+    //     setShowSuggestions(false);
+    //     // this.$emit('onSelectSuggestion', { suggestion })
+    //     // SegmentService.createTicketTrack(
+    //     //   SegmentService.events.CHAT_AI_SUGGESTION_SELECT,
+    //     //   this.ticket,
+    //     //   {
+    //     //     'ticketId': this.ticketId,
+    //     //     'text-suggestions': this.suggestions,
+    //     //     'text-selected': suggestion,
+    //     //     'agentIdentity': decodeURIComponent(this.ticket.agentIdentity.split('@')[0])
+    //     //   }
+    //     // )
+    //     alert(
+    //         `Opção escolhida: \n ${suggestion.id} - ${suggestion.suggestion}`
+    //     );
+    // }
 
     function close() {
         setShowSuggestions(false);
+        setHasSuggestionsLoaded(false);
         console.log('Close');
     }
 
@@ -96,16 +98,13 @@ const ChatSuggestions = () => {
                 size="short"
                 onClick={() => toggleSuggestionsDialog()}
             >
-                {t('chatSuggestions.suggestedAnswer.button')} -{' '}
-                {showSuggestions}
+                {t('chatSuggestions.suggestedAnswer.button')}
             </bds-button>
-            <bds-paper elevation="static" className="suggestions-dialog" />
+            {/* {showSuggestions ? (
+                <div> <div className="overlay" onClick={close} onKeyDown={close}/> </div>
+            ) : null} */}
             {showSuggestions ? (
-                <bds-paper
-                    elevation="static"
-                    className="suggestions-dialog"
-                    // data-testid="suggestions-dialog"
-                >
+                <bds-paper elevation="static" className="suggestions-dialog">
                     <div className="h-100 w-100">
                         <div className="suggestions-heading">
                             <bds-typo
@@ -157,25 +156,25 @@ const ChatSuggestions = () => {
                                     </bds-button>
                                 </div>
                             ) : null}
-                            {!loading &&
-                            !hasFailedToLoadSuggestions &&
-                            suggestions ? (
-                                    <ul className="suggestions-list">
-                                        {suggestions.map((suggestion) => (
-                                            <li className="suggestions-item pointer" key={`suggestions-item-${suggestion.id}`} >
-                                                <bds-typo
-                                                    tag="p"
-                                                    variant="fs-14"
-                                                    bold="regular"
-                                                    margin="false"
-                                                    onClick={selectSuggestion(suggestion)}
-                                                >
-                                                    {suggestion.id} - {suggestion.suggestion}
-                                                </bds-typo>
-                                            </li>
-                                        ))}
-                                    </ul>
-                                ) : null}
+                            {!loading && !hasFailedToLoadSuggestions && suggestions ? (
+                                <ul className="suggestions-list">
+                                    {suggestions.map((suggestion) => (
+                                        <li
+                                            className="suggestions-item pointer"
+                                        >
+                                            <bds-typo
+                                                key={`suggestions-item-${suggestion.id}`}
+                                                tag="p"
+                                                variant="fs-14"
+                                                bold="regular"
+                                                margin="false"                                                
+                                            >
+                                                {suggestion.id} - {suggestion.suggestion}
+                                            </bds-typo>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : null}
                         </div>
                     </div>
                 </bds-paper>
